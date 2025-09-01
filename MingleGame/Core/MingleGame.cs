@@ -80,7 +80,7 @@ public sealed class MingleGame
             throw new InvalidOperationException($"Couldn't start {name}: it's already active.");
 
         if (Players.Count() < minimumPlayersRequired)
-            throw new InvalidOperationException($"Minimum {minimumPlayersRequired} players required to start {name}.");
+            throw new InvalidOperationException($"Minimum {minimumPlayersRequired} players as {playersRoleType} required to start {name}.");
 
         if (!Round.IsRoundInProgress)
             throw new InvalidOperationException($"Couldn't start {name}: round has to be started.");

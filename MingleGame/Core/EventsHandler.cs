@@ -1,4 +1,5 @@
 ﻿using LabApi.Events.Arguments.PlayerEvents;
+using LabApi.Events.Arguments.ServerEvents;
 using LabApi.Events.CustomHandlers;
 using LabApi.Features.Wrappers;
 using MingleGame.Interfaces;
@@ -17,6 +18,12 @@ internal class EventsHandler : CustomEventsHandler
         if (Event.IsActive)
             Event.EndEvent();
     }
+
+    public override void OnServerWaveRespawning(WaveRespawningEventArgs ev)
+        => ev.IsAllowed = false;
+
+    public override void OnServerWaveTeamSelecting(WaveTeamSelectingEventArgs ev)
+        => ev.IsAllowed = false;
 
     public override void OnPlayerTogglingNoclip(PlayerTogglingNoclipEventArgs ev)
         => Interact(ev.Player);
