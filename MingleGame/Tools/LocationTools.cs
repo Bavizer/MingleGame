@@ -33,7 +33,7 @@ public static class LocationTools
 
     private static IEnumerator<float> Rotate_Coroutine(Transform transform, Vector3 delta, float duration)
     {
-        float elapsedTime = 0f;
+        var elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
@@ -45,8 +45,8 @@ public static class LocationTools
 
     private static IEnumerator<float> SetLightIntensity_Coroutine(LightSourceToy light, float intensity, float switchingDuration)
     {
-        float elapsedTime = 0f;
-        float initialIntensity = light.NetworkLightIntensity;
+        var elapsedTime = 0f;
+        var initialIntensity = light.NetworkLightIntensity;
 
         while (elapsedTime < switchingDuration)
         {
@@ -59,8 +59,8 @@ public static class LocationTools
 
     private static IEnumerator<float> SwitchLightColor_Coroutine(LightSourceToy light, IEnumerable<Color> colors, float delta, float duration)
     {
-        float startTime = Time.time;
-        float elapsedTime = 0f;
+        var startTime = Time.time;
+        var elapsedTime = 0f;
 
         var colors1 = colors.ToArray();
         while (elapsedTime < duration)

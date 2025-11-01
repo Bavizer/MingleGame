@@ -13,11 +13,8 @@ internal class EventsHandler : CustomEventsHandler
 
     private static MingleGame Event => MingleGame.Instance;
 
-    public override void OnServerRoundRestarted()
-    {
-        if (Event.IsActive)
-            Event.EndEvent();
-    }
+    public override void OnServerRoundRestarted() 
+        => Event.EndEvent();
 
     public override void OnServerWaveRespawning(WaveRespawningEventArgs ev)
         => ev.IsAllowed = false;
@@ -33,13 +30,10 @@ internal class EventsHandler : CustomEventsHandler
 
     private void Interact(Player player)
     {
-        if (Physics.Raycast(player.Camera.position, player.Camera.forward, out var hit, 2f, _defaultLayerMask))
-        {
-            var component = hit.collider.GetComponentInParent<IInteractable>();
-            if (component == null)
-                return;
+        if (!Physics.Raycast(player.Camera.position, player.Camera.forward, out var hit, 2f, _defaultLayerMask))
+            return;
 
-            component.Interact(player);
-        }
+        var component = hit.collider.GetComponentInParent<IInteractable>();
+        component?.Interact(player);
     }
 }

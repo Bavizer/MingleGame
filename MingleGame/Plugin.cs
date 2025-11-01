@@ -17,7 +17,7 @@ internal class Plugin : Plugin<Config>
 
     public override string Description => "A plugin, that implements the Mingle Game inspired by Netflix series \"Squid Game: Season 2\"";
 
-    public override Version Version => new(1, 0, 0);
+    public override Version Version => new(1, 1, 0);
 
     public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
 

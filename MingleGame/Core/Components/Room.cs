@@ -19,6 +19,12 @@ public class Room : MonoBehaviour
 
     public bool HasRequiredPlayersAmount => PlayersInRoom.Count == MingleGame.Instance.RequiredPlayersInRoom;
 
+    public bool IsDoorLocked
+    {
+        get => _door.IsLocked;
+        set => _door.IsLocked = value;
+    }
+
 #nullable restore
 
     private void Awake()
@@ -33,12 +39,6 @@ public class Room : MonoBehaviour
         _door.Init(this);
 
         Light = GetComponentInChildren<LightSourceToy>();
-    }
-
-    public bool IsDoorLocked
-    {
-        get => _door.IsLocked;
-        set => _door.IsLocked = value;
     }
 
     public void OpenDoor()

@@ -94,9 +94,6 @@ public sealed class MingleGame
             _eventCoroutine = Timing.RunCoroutine(RunGame());
             _checkCoroutine = Timing.RunCoroutine(UpdatePlayers());
 
-            foreach (var player in Players)
-                player.SendHint(Config.InfoStrings.DoorInteractionHint, 10f);
-
             Logger.Info("Event started.");
         }
         catch
@@ -153,6 +150,9 @@ public sealed class MingleGame
     {
         yield return Timing.WaitForOneFrame;
 
+        foreach (var player in Players)
+            player.SendHint(Config.InfoStrings.DoorInteractionHint, 10f);
+
         while (!AreEndConditionsCompleted)
         {
             OnStartingGameRound();
@@ -195,7 +195,7 @@ public sealed class MingleGame
     private void OnStartingCalmPart()
     {
         var clip = AudioClipStorage.AudioClips[AudioClipNames.CalmPart];
-        float clipDuration = clip.Samples.Length / (float)clip.SampleRate;
+        var clipDuration = clip.Samples.Length / (float)clip.SampleRate;
         CalmPartDuration = Random.Range(clipDuration / 2, clipDuration);
 
         _gameLocation!.OnStartingCalmPart(CalmPartDuration);
@@ -235,11 +235,14 @@ public sealed class MingleGame
 
     private void SetRandomRequiredPlayersAmountInRoom()
     {
-        int playersAmount = Players.Count();
-        int maxPlayersInRoom = playersAmount > Config.MaxPlayersAmountPerRoom ? Config.MaxPlayersAmountPerRoom : playersAmount - 1;
+        var playersAmount = Players.Count();
+        var maxPlayersInRoom = playersAmount > Config.MaxPlayersAmountPerRoom 
+                                ? Config.MaxPlayersAmountPerRoom 
+                                : playersAmount - 1;
+
         RequiredPlayersInRoom = maxPlayersInRoom == 1 ? maxPlayersInRoom : Random.Range(1, maxPlayersInRoom + 1);
 
-        int safeRoomsAmount = playersAmount / RequiredPlayersInRoom;
+        var safeRoomsAmount = playersAmount / RequiredPlayersInRoom;
 
         if (safeRoomsAmount > _gameLocation!.rooms.Count)
             safeRoomsAmount = _gameLocation.rooms.Count;
