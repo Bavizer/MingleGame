@@ -5,9 +5,6 @@
 - 🤖 Plugin randomly selects game's calm part duration and players room amount.
 - ⏱ The event ends when one or no players remain.
 
-> [!WARNING]
-> **Plugin is in a public testing. <ins>There are possibilities of bugs and errors.</ins> Use at your own risk.**
-
 # ⭐ Features
 - 🏠 **Schematic**: interactable location with many structured objects.
 - ⚙ **Configurable**: change some event settings in the config file and schematic.
@@ -40,7 +37,7 @@ To start or end the event you can use one of the methods below:
 > [!IMPORTANT]
 > **For this plugin to work correctly, you need to install (if you didn't) [ProjectMER](https://github.com/Michal78900/ProjectMER) and [AudioPlayerApi](https://github.com/Killers0992/AudioPlayerApi) plugins.**
 
-> [!WARNING]
+> [!NOTE]
 > **This plugin doesn't include audio files for license reasons. You need to include them by yourself and specify paths in the config file. Technically, you can use any audio file, even not related to the game.
 > See audio requirements [here](https://github.com/Killers0992/AudioPlayerApi#audio-requirements).
 > <br><ins>EVENT WILL NOT START IF AUDIO FILES WERE NOT FOUND!</ins>**
