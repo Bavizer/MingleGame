@@ -61,7 +61,7 @@ Plugin and game location schematic originally created by [Bavizer](https://githu
 
 # 🖼 Media
 
-https://github.com/user-attachments/assets/14625bdc-0106-437f-ba13-c5774215768d
+https://github.com/user-attachments/assets/44d65b35-8788-48e5-8330-461c3a8be037
 
-![MingleGame](https://github.com/user-attachments/assets/b7dc799d-b352-4e92-80a0-c44b5a3b70b6)
-![MingleGameUnity](https://github.com/user-attachments/assets/1d3b7563-4e41-4ac9-b522-936b5994172a)
+![MingleGame](https://github.com/user-attachments/assets/1613d6e2-d29d-44b5-a4be-8650b5f0840d)
+![MingleGame](https://github.com/user-attachments/assets/4b7cde3b-0eb9-424f-923e-b0f4d97b600a)
