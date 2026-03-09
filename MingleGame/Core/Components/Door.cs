@@ -23,8 +23,12 @@ public class Door : MonoBehaviour, IInteractable
     public bool IsLocked { get; internal set; }
 
 
-    private void Awake() 
-        => _coroutineTag = GetInstanceID().ToString() + "_RotateDoor";
+    private void Awake()
+    {
+        _coroutineTag = GetInstanceID().ToString() + "_RotateDoor";
+
+        Room = GetComponentInParent<Room>();
+    }
 
     public void Interact(Player? sender) 
         => TryRotateDoor(sender);
@@ -45,9 +49,6 @@ public class Door : MonoBehaviour, IInteractable
 
         Timing.RunCoroutineSingleton(RotateDoorCoroutine(), _coroutineTag, SingletonBehavior.Abort);
     }
-
-    internal void Init(Room room) 
-        => Room = room;
 
     private IEnumerator<float> RotateDoorCoroutine()
     {
