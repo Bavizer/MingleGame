@@ -10,8 +10,7 @@ public class Room : MonoBehaviour
 #nullable disable
 
     private Door _door;
-
-    private BoxCollider _boxCollider;
+    private RoomTrigger _roomTrigger;
 
     internal HashSet<Player> PlayersInRoom { get; } = [];
 
@@ -29,14 +28,8 @@ public class Room : MonoBehaviour
 
     private void Awake()
     {
-        var trigger = transform.Find("Trigger");
-
-        _boxCollider = gameObject.AddComponent<BoxCollider>();
-        _boxCollider.isTrigger = true;
-        _boxCollider.size = trigger.localScale;
-
+        _roomTrigger = transform.Find("Trigger").gameObject.AddComponent<RoomTrigger>();
         _door = transform.Find("Door").gameObject.AddComponent<Door>();
-        _door.Init(this);
 
         Light = GetComponentInChildren<LightSourceToy>();
     }
@@ -51,17 +44,5 @@ public class Room : MonoBehaviour
     {
         if (_door.IsOpen)
             _door.TryRotateDoor();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (Player.TryGet(other.gameObject, out var player))
-            PlayersInRoom.Add(player);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (Player.TryGet(other.gameObject, out var player))
-            PlayersInRoom.Remove(player);
     }
 }
