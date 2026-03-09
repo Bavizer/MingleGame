@@ -66,9 +66,11 @@ internal class MingleGameLocation
         });
     }
 
-    internal void Destroy() => _location.Destroy();
+    internal void Destroy()
+        => _location.Destroy();
 
-    internal void OnStart() => _allLights.ForEach(l => l.NetworkLightIntensity = 0f);
+    internal void OnStart()
+        => _allLights.ForEach(l => l.NetworkLightIntensity = 0f);
 
     internal void OnStartingCalmPart(float duration)
     {

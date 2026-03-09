@@ -27,8 +27,8 @@ public sealed class MingleGame
 
     private MingleGameLocation? _gameLocation;
 
-    public const RoleTypeId playersRoleType = RoleTypeId.ClassD;
-    public const ushort minimumPlayersRequired = 2;
+    public const RoleTypeId PLAYERS_ROLE_TYPE = RoleTypeId.ClassD;
+    public const ushort MINIMUM_PLAYERS_REQUIRED = 2;
 
     #endregion
 
@@ -59,9 +59,9 @@ public sealed class MingleGame
 
     public bool IsActive => _eventCoroutine.IsRunning || _checkCoroutine.IsRunning;
 
-    public bool AreEndConditionsCompleted => Players.Count() < minimumPlayersRequired;
+    public bool AreEndConditionsCompleted => Players.Count() < MINIMUM_PLAYERS_REQUIRED;
 
-    public IEnumerable<Player> Players => Player.List.Where(p => p.Role == playersRoleType).ToArray();
+    public IEnumerable<Player> Players => Player.ReadyList.Where(p => p.Role == PLAYERS_ROLE_TYPE).ToArray();
 
     #endregion
 
@@ -79,8 +79,8 @@ public sealed class MingleGame
         if (IsActive)
             throw new InvalidOperationException($"Couldn't start {name}: it's already active.");
 
-        if (Players.Count() < minimumPlayersRequired)
-            throw new InvalidOperationException($"Minimum {minimumPlayersRequired} players as {playersRoleType} required to start {name}.");
+        if (Players.Count() < MINIMUM_PLAYERS_REQUIRED)
+            throw new InvalidOperationException($"Minimum {MINIMUM_PLAYERS_REQUIRED} players as {PLAYERS_ROLE_TYPE} required to start {name}.");
 
         if (!Round.IsRoundInProgress)
             throw new InvalidOperationException($"Couldn't start {name}: round has to be started.");
@@ -240,7 +240,9 @@ public sealed class MingleGame
                                 ? Config.MaxPlayersAmountPerRoom 
                                 : playersAmount - 1;
 
-        RequiredPlayersInRoom = maxPlayersInRoom == 1 ? maxPlayersInRoom : Random.Range(1, maxPlayersInRoom + 1);
+        RequiredPlayersInRoom = maxPlayersInRoom == 1 
+                                ? maxPlayersInRoom 
+                                : Random.Range(1, maxPlayersInRoom + 1);
 
         var safeRoomsAmount = playersAmount / RequiredPlayersInRoom;
 
@@ -251,7 +253,7 @@ public sealed class MingleGame
             safeRoomsAmount -= 1;
 
         var rooms = _gameLocation!.rooms.ToList();
-        for (int i = 0; i < safeRoomsAmount; i++)
+        for (var i = 0; i < safeRoomsAmount; i++)
         {
             var randomRoom = rooms.PullRandomItem();
             _gameLocation!.safeRooms.Add(randomRoom);

@@ -13,7 +13,7 @@ internal class Plugin : Plugin<Config>
 
     public override string Author => "Bavizer";
 
-    public override string Name => "MingleGame";
+    public override string Name => nameof(MingleGame);
 
     public override string Description => "A plugin, that implements the Mingle Game inspired by Netflix series \"Squid Game: Season 2\"";
 
@@ -23,10 +23,10 @@ internal class Plugin : Plugin<Config>
 
     public override void Enable()
     {
-        Instance = this;
+        Instance ??= this;
 
-        AudioClipStorage.LoadClip(@Config.AudioPaths.CalmPart, AudioClipNames.CalmPart);
-        AudioClipStorage.LoadClip(@Config.AudioPaths.DangerPart, AudioClipNames.DangerPart);
+        AudioClipStorage.LoadClip(Config.AudioPaths.CalmPart, AudioClipNames.CalmPart);
+        AudioClipStorage.LoadClip(Config.AudioPaths.DangerPart, AudioClipNames.DangerPart);
     }
 
     public override void Disable()
