@@ -162,7 +162,7 @@ public sealed class MingleGame
             yield return Timing.WaitForSeconds(CalmPartDuration);
 
             OnStartingDangerPart();
-            yield return Timing.WaitForSeconds(DangerPartDuration);
+            yield return Timing.WaitForSeconds(DangerPartDuration + 1f); // Extra time to make transition smoother
 
             OnEndingGameRound();
             yield return Timing.WaitForSeconds(2.5f);
@@ -189,7 +189,10 @@ public sealed class MingleGame
         CurrentRound++;
 
         foreach (var player in Players)
+        {
+            player.EnableEffect<Ensnared>(duration: 2f);
             player.Position = _gameLocation!.playerSpawnPoint.position;
+        }
     }
 
     private void OnStartingCalmPart()
