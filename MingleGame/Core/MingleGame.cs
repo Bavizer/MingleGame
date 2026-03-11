@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using Utils.NonAllocLINQ;
+using HintMessages = MingleGame.Other.Hints;
 
 namespace MingleGame.Core;
 
@@ -150,8 +151,16 @@ public sealed class MingleGame
     {
         yield return Timing.WaitForOneFrame;
 
+        var hintDuration = 10f;
+
         foreach (var player in Players)
-            player.SendHint(Config.InfoStrings.DoorInteractionHint, 10f);
+            player.SendHint(HintMessages.contactInfo, hintDuration);
+
+        Timing.CallDelayed(hintDuration, () =>
+        {
+            foreach (var player in Players)
+                player.SendHint(Config.InfoStrings.DoorInteractionHint, hintDuration);
+        });
 
         while (!AreEndConditionsCompleted)
         {

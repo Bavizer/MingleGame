@@ -7,9 +7,13 @@ namespace MingleGame;
 
 internal class Plugin : Plugin<Config>
 {
+    public const string GITHUB_REPOSITORY_LINK = "https://github.com/Bavizer/MingleGame-SL";
+
 #nullable disable
     public static Plugin Instance { get; private set; }
 #nullable restore
+
+    public string DiscordContactUsername => $"@{Author}";
 
     public override string Author => "Bavizer";
 
