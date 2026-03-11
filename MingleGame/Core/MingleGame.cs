@@ -171,7 +171,7 @@ public sealed class MingleGame
             yield return Timing.WaitForSeconds(CalmPartDuration);
 
             OnStartingDangerPart();
-            yield return Timing.WaitForSeconds(DangerPartDuration + 1f); // Extra time to make transition smoother
+            yield return Timing.WaitForSeconds(DangerPartDuration + 0.5f); // Extra time to make transition smoother
 
             OnEndingGameRound();
             yield return Timing.WaitForSeconds(2.5f);
@@ -283,7 +283,7 @@ public sealed class MingleGame
         }
         winner?.SetRole(RoleTypeId.Tutorial);
 
-        var winnerString = winner == null ? "undefined" : winner.Nickname;
+        var winnerString = winner == null ? "<color=white><u>undefined<u></color>" : winner.Nickname;
         var gameEndMessage = Config.InfoStrings.GameEnd.Replace("{winner}", winnerString);
 
         Server.SendBroadcast(gameEndMessage, 10, shouldClearPrevious: true);
